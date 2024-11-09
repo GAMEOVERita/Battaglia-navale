@@ -1,32 +1,6 @@
 import java.util.Scanner;
 
 public class SceltaPosizione {
-	
-	
-	
-    private boolean isFree(int posX, int posY, int dimNave, char direzione, int DIM) {
-        //controllo direzione
-
-        if (direzione == 'v'){ //se verticale
-            // x fissa y mobile
-            for (int i = 0; i < dimNave; i++){
-            	
-                if (Mappa.mappa[posY-1+i][posX-1].getContenuto() == '+'){  //UGUALE A SOTTO
-                    System.out.println("LA NAVE INTERSECA CON UN'ALTRA GIA' ESISTENTE");
-                    return false;
-                }
-            }
-        }else{//se orizzontale
-            // x mobile y fissa
-            for (int i = 0; i < dimNave; i++){
-                if (Mappa.getMappa((posY-1), (posX-1+i)).getContenuto() == '+'){  // DA SISTEMARE
-                    System.out.println("LA NAVE INTERSECA CON UN'ALTRA GIA' ESISTENTE");
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
 
     public void sceltaPosizione(char direzione, int DIM, int dimNave){
         int posY, posX;
@@ -68,6 +42,30 @@ public class SceltaPosizione {
             }while(!isValid);//x < 0, x > DIM ; x ; x + dim nave > DIM
         }while(!this.isFree(posX, posY, dimNave, direzione, DIM));
         Mappa.inserisciNave(dimNave, direzione, posX, posY); // REFERENCE NON VISIBILE (è private all'interno di Mappa.java e va mpdificata)
+    }
+    
+    private boolean isFree(int posX, int posY, int dimNave, char direzione, int DIM) {
+        //controllo direzione
+
+        if (direzione == 'v'){ //se verticale
+            // x fissa y mobile
+            for (int i = 0; i < dimNave; i++){
+            	
+                if (Mappa.mappa[posY-1+i][posX-1].getContenuto() == '+'){  //UGUALE A SOTTO
+                    System.out.println("LA NAVE INTERSECA CON UN'ALTRA GIA' ESISTENTE");
+                    return false;
+                }
+            }
+        }else{//se orizzontale
+            // x mobile y fissa
+            for (int i = 0; i < dimNave; i++){
+                if (Mappa.getMappa((posY-1), (posX-1+i)).getContenuto() == '+'){  // DA SISTEMARE
+                    System.out.println("LA NAVE INTERSECA CON UN'ALTRA GIA' ESISTENTE");
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
 }

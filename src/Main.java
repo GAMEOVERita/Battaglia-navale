@@ -25,10 +25,9 @@ public class Main {
             for (int j = 0; j < DIM - 1 - i; j++) {
                 System.out.print("\n"+(j+1)+"' NAVE DI "+(DIM-1-i)+" DA "+i+" POSTI");
                 direzione = p1.sceltaDirezione();
-                SceltaPosizione.sceltaPosizione(direzione, DIM, i); //?? NON SO CHE SIGNIFICA STO ERRORE
+                mappa.sceltaPosizione(direzione, DIM, i); //?? NON SO CHE SIGNIFICA STO ERRORE
                 mappa.stampaMappa();
             }
         }
     }
 }
-
