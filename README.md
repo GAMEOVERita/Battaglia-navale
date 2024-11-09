@@ -1,2 +1,3 @@
 # Battaglia-navale
- battaglia navale in java per imparare un po' le basi in modo indipendente dalla scuola : )
+battaglia navale (battleship if you speak english) is a tabletop game played by two players who take turns to fight each other and win, to win a player must wipe out all the ships in the enemy field, we are trying to recreate this simple game in java to better learn and understand java outside school settings
+STILL WIP -- the code is still being worked on and the game is not functional, if you have any constructive criticism we will be happy to hear it :)
