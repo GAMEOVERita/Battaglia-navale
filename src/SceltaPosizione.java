@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class SceltaPosizione {
 
-    public static void sceltaPosizione(char direzione, int DIM, int dimNave, Mappa mappa){
+    public static void sceltaPosizione(char direzione, int DIM, int dimNave, Map map){
         int posY, posX;
         boolean isValid;
         Scanner sc = new Scanner(System.in);
@@ -11,10 +11,10 @@ public class SceltaPosizione {
                 isValid = true;
                 //richiesta x
                 try {
-                    System.out.println("inserire la x");
+                    System.out.println("insert the value for x");
                     posX = sc.nextInt();
                 }catch(Exception InputMismatchException){
-                    System.out.println("valore invalido");
+                    System.out.println("WARNING: value is invalid");
                     sc.nextLine();
                     posX=-1;
                 }
@@ -27,10 +27,10 @@ public class SceltaPosizione {
                 isValid = true;
                 //richiesta y
                 try{
-                    System.out.println("inserire la y");
+                    System.out.println("insert the value for y");
                     posY = sc.nextInt();
                 }catch(Exception InputMismatchException){
-                    System.out.println("valore invalido");
+                    System.out.println("WARNING: the value is invalid");
                     sc.nextLine();
                     posY=-1;
                 }
@@ -40,27 +40,27 @@ public class SceltaPosizione {
                 }
                 //controllo
             }while(!isValid);//x < 0, x > DIM ; x ; x + dim nave > DIM
-        }while(!isFree(posX, posY, dimNave, direzione, DIM, mappa));
-        mappa.inserisciNave(dimNave, direzione, posX, posY); // REFERENCE NON VISIBILE (è private all'interno di Mappa.java e va mpdificata)
+        }while(!isFree(posX, posY, dimNave, direzione, DIM, map));
+        map.insertShip(dimNave, direzione, posX, posY);
     }
     
-    private static boolean isFree(int posX, int posY, int dimNave, char direzione, int DIM, Mappa mappa) {
+    private static boolean isFree(int posX, int posY, int dimNave, char direzione, int DIM, Map map) {
         //controllo direzione
 
-        if (direzione == 'v'){ //se verticale
-            // x fissa y mobile
+        if (direzione == 'v'){ //if the ship is vertical
+            // y is mobile
             for (int i = 0; i < dimNave; i++){
             	
-                if (mappa.getMappa(posY-1+i, posX-1).getContenuto() == '+'){  //UGUALE A SOTTO
-                    System.out.println("LA NAVE INTERSECA CON UN'ALTRA GIA' ESISTENTE");
+                if (map.getMap(posY-1+i, posX-1).getContenuto() == '+'){
+                    System.out.println("WARNING: the ship intersect with an already placed ship");
                     return false;
                 }
             }
-        }else{//se orizzontale
-            // x mobile y fissa
+        }else{//if the ship is horizontal
+            // x is mobile
             for (int i = 0; i < dimNave; i++){
-                if (mappa.getMappa(posY-1, posX-1+i).getContenuto() == '+'){  // DA SISTEMARE
-                    System.out.println("LA NAVE INTERSECA CON UN'ALTRA GIA' ESISTENTE");
+                if (map.getMap(posY-1, posX-1+i).getContenuto() == '+'){
+                    System.out.println("WARNING: the ship intersect with an already placed ship");
                     return false;
                 }
             }

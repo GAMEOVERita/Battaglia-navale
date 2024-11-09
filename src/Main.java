@@ -9,24 +9,24 @@ public class Main {
         do {
 
             try {
-                System.out.println("inserire la dimensione della mappa (non minore di 5 o maggiore di 12)...");
+                System.out.println("insert map size (between 5 and 12 both included)...");
                 DIM = sc.nextInt();
             }catch(Exception e){
-                System.out.println("valore non valido, riprova");
+                System.out.println("WARNING: the value is not valid, retry");
                 DIM = 0;
                 sc.nextLine();
             }
         } while (DIM < 5 || DIM >12);
-        Mappa mappa = new Mappa(DIM);
+        Map map = new Map(DIM);
 
 
-        mappa.stampaMappa();
+        map.printMap();
         for (int i = 2; i <= 5 ; i++) {
             for (int j = 0; j < DIM - 1 - i; j++) {
-                System.out.print("\n"+(j+1)+"' NAVE DI "+(DIM-1-i)+" DA "+i+" POSTI");
+                System.out.print("\nShip "+(j+1)+" out of "+(DIM-1-i)+" which is "+i+" cells long");
                 direzione = p1.sceltaDirezione();
-                SceltaPosizione.sceltaPosizione(direzione, DIM, i, mappa);
-                mappa.stampaMappa();
+                SceltaPosizione.sceltaPosizione(direzione, DIM, i, map);
+                map.printMap();
             }
         }
     }

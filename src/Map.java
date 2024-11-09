@@ -1,27 +1,27 @@
 import java.util.Scanner;
 
-public class Mappa {
+public class Map {
     private int DIM = 5;
-    public Casella[][] mappa /*= new Casella[DIM][DIM]*/;
+    public Casella[][] map /*= new Casella[DIM][DIM]*/;
 
 
-    public Mappa(int DIM) {
+    public Map(int DIM) {
         this.DIM = DIM;
-        this.mappa = new Casella[DIM][DIM];
-        //POPOLA MAPPA
+        this.map = new Casella[DIM][DIM];
+        //POPOLA MAP
         for (int i = 0; i < DIM; i++) {
             for (int j = 0; j < DIM; j++)
-                mappa[i][j] = new Casella('~', false);
+                map[i][j] = new Casella('~', false);
         }
     }
 
-    public Casella getMappa(int y, int x) { // DA SISTEMARE
-    	return mappa[y][x];
+    public Casella getMap(int y, int x) { // DA SISTEMARE
+    	return map[y][x];
     }
     
 
 
-    public void stampaMappa() {
+    public void printMap() {
         System.out.print("\t");
         for (int i = 0; i < DIM; i++)
             System.out.print(i + 1 + "\t");
@@ -30,29 +30,29 @@ public class Mappa {
             System.out.print("\n" + (i + 1) + "\t");
             //stampa x
             for (int j = 0; j < DIM; j++) {
-                System.out.print(mappa[i][j] + "\t");
+                System.out.print(map[i][j] + "\t");
             }
         }
     }
 
-    public void inserisciNave(int dimNave, char direzione,int posX, int posY) {
+    public void insertShip(int dimNave, char direzione,int posX, int posY) {
         for (int i = 0; i < dimNave; i++) {
             if (direzione == 'v')
-                mappa[posY + i - 1][posX - 1].setContenuto('+');
+                map[posY + i - 1][posX - 1].setContenuto('+');
             else {
-                mappa[posY - 1][posX + i - 1].setContenuto('+');
+                map[posY - 1][posX + i - 1].setContenuto('+');
             }
         }
     }
 
-    public void attacco(int y, int x) {
-    	mappa[y][x].setContenuto('*');
+    public void attack(int y, int x) {
+    	map[y][x].setContenuto('*');
     }
     
     public boolean isWon() {
     	for (int i = 0; i < DIM; i++) {
         	for (int j = 0; j < DIM; j++) {
-        		if (mappa[i][j].getContenuto() == '+') {
+        		if (map[i][j].getContenuto() == '+') {
         			return false;
         		}
         	}
