@@ -79,15 +79,15 @@ public class Nave {
 
     public void isFree(Casella[][] mappa, int DIM) throws OccupiedSlotException {
         if (this.direzione == 'v') {
-            for (int i = this.posY; i < this.dimensione; i++) {
-                if (mappa[i][this.posX].getContenuto() == '+')
+            for (int i = this.posY-1; i < this.dimensione; i++) {
+                if (mappa[i][this.posX-1].getContenuto() == '+')
                     throw new OccupiedSlotException("The ship intersecate with an another ship");
 
             }
         }
             else{
-                for (int i = this.posX; i < this.dimensione; i++) {
-                    if (mappa[this.posY][i].getContenuto() == '+')
+                for (int i = this.posX-1; i < this.dimensione; i++) {
+                    if (mappa[this.posY-1][i].getContenuto() == '+')
                         throw new OccupiedSlotException("The ship intersecate with an another ship");
 
                 }
