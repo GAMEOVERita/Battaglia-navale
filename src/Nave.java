@@ -10,6 +10,7 @@ public class Nave {
         this.direzione = direzione;
         this.dimensione = dimensione;
     }
+
     public Nave(int dimensione) {
         this.dimensione = dimensione;
         this.stato = '+';
@@ -58,17 +59,17 @@ public class Nave {
         this.dimensione = dimensione;
     }
 
-    public void insert(Casella[][] mappa){
+    public void insert(Casella[][] mappa) {
 
 
-        for(int i = 0; i < this.dimensione; i++){
+        for (int i = 0; i < this.dimensione; i++) {
             //se orizzontale itera x
-            if(this.direzione == 'o'){
-                mappa[this.posY-1][this.posX+i-1].setContenuto('+');
+            if (this.direzione == 'o') {
+                mappa[this.posY - 1][this.posX + i - 1].setContenuto('+');
             }
             //se verticale itera y
-            else{
-                mappa[this.posY+i-1][posX-1].setContenuto('+');
+            else {
+                mappa[this.posY + i - 1][posX - 1].setContenuto('+');
             }
 
         }
@@ -77,12 +78,20 @@ public class Nave {
     }
 
     public void isFree(Casella[][] mappa, int DIM) throws OccupiedSlotException {
-        for (int i = this.posY; i < this.dimensione; i++){
-            for(int j = posX; j < this.dimensione; j++) {
-                if (mappa[i][j].getContenuto() == '+')
+        if (this.direzione == 'v') {
+            for (int i = this.posY; i < this.dimensione; i++) {
+                if (mappa[i][this.posX].getContenuto() == '+')
                     throw new OccupiedSlotException("The ship intersecate with an another ship");
 
             }
         }
+            else{
+                for (int i = this.posX; i < this.dimensione; i++) {
+                    if (mappa[this.posY][i].getContenuto() == '+')
+                        throw new OccupiedSlotException("The ship intersecate with an another ship");
+
+                }
+            }
+
     }
 }

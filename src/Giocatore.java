@@ -48,9 +48,9 @@ public class Giocatore {
     public int scegliPosizione(char direzione, int DIM, int dimNave ,boolean isPosX, Scanner sc) throws IndexOutOfBoundsException {
         int posizione;
         posizione = sc.nextInt();
-        if (isPosX && (posizione > DIM || posizione < 1 ||direzione == 'o' &&  posizione >= DIM-dimNave+1))
+        if (isPosX && (posizione > DIM || posizione < 1 ||direzione == 'o' &&  posizione > DIM-dimNave+1))
             throw new IndexOutOfBoundsException("index out of bounds");
-        if (!isPosX && ((posizione > DIM || posizione < 1 ||direzione == 'v' &&  posizione >= DIM-dimNave+1))){
+        if (!isPosX && ((posizione > DIM || posizione < 1 ||direzione == 'v' &&  posizione > DIM-dimNave+1))){
             throw new IndexOutOfBoundsException("index out of bounds");
         }
         return posizione;
