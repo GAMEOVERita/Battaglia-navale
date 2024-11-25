@@ -3,10 +3,36 @@ import java.util.Scanner;
 public class Giocatore {
     private String nick;
     private int numNavi;
-    private Nave[] navi;
+    public Nave[] navi;
 
-    public Giocatore(String nick) {
+
+
+    public Giocatore(String nick, int numNavi) {
         this.nick = nick;
+        this.numNavi = numNavi;
+        this.navi = new Nave[numNavi];
+
+    }
+
+    public void inizializzaNavi(){
+        for (int i = 0; i < this.numNavi; i++) {
+            navi[i] = new Nave(i + 2);
+        }
+    }
+
+    public int getNumNavi() {
+        return numNavi;
+
+    public void setNumNavi(int numNavi) {
+        this.numNavi = numNavi;
+    }
+
+    public Nave[] getNavi() {
+        return navi;
+    }
+
+    public void setNavi(Nave[] navi) {
+        this.navi = navi;
     }
 
     public char scegliDirezione() throws InstantiationError {
@@ -56,6 +82,10 @@ public class Giocatore {
         return posizione;
 
     }
+
+    /*public boolean attaccaNave(int posX, int posY, Casella[][] mappa){
+        if(mappa[posY][posX] ==  )
+    }*/
 
 
 

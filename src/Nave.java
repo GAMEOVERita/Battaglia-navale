@@ -77,7 +77,7 @@ public class Nave {
 
     }
 
-    public void isFree(Casella[][] mappa, int DIM) throws OccupiedSlotException {
+    public void isFree(Casella[][] mappa) throws OccupiedSlotException {
         if (this.direzione == 'v') {
             for (int i = this.posY-1; i < this.dimensione; i++) {
                 if (mappa[i][this.posX-1].getContenuto() == '+')

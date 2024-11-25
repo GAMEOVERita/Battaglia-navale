@@ -3,29 +3,35 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        //chose map dimension
-        final int DIM_MAPPA = 5;
-        final int NUM_NAVI = DIM_MAPPA - 3;
         Scanner sc = new Scanner(System.in);
+        boolean flag;
+        int DIM_MAPPA = 0;
+        //chose map dimension
+        do {
+            System.out.println("Inserire la dimensione della mappa (da 5 a 7");
+            flag = true;
+            try {
+                DIM_MAPPA = sc.nextInt();
+            } catch (Exception InputMismatchException) {
+                System.out.println("Il valore deve essere intero");
+                sc.nextLine();
+                flag = false;
+            }
+        } while(!flag || DIM_MAPPA < 5 || DIM_MAPPA > 7);
+
         Casella[][] mappa;
-        Giocatore giocatore = new Giocatore("dummy");
-        boolean flag = true;
-        Nave nave = new Nave('+', 'v', 3);
-        Nave[] navi = new Nave[NUM_NAVI];
+        Giocatore giocatore = new Giocatore("dummy", DIM_MAPPA - 3);
+        giocatore.inizializzaNavi();
         mappa = new Casella[DIM_MAPPA][DIM_MAPPA];
 
         giocatore.popolaMappa(mappa, DIM_MAPPA);
         giocatore.visualizzaMappa(mappa, DIM_MAPPA);
-
-        for (int i = 0; i < NUM_NAVI; i++) {
-            navi[i] = new Nave(i + 2);
-        }
-        for (int i = 0; i < NUM_NAVI; i++) {
+        for (int i = 0; i < giocatore.getNumNavi(); i++) {
             //direction
             do {
                 flag = true;
                 try {
-                    navi[i].setDirezione(giocatore.scegliDirezione());
+                    giocatore.getNavi()[i].setDirezione(giocatore.scegliDirezione());
                 } catch (InstantiationError e) {
                     System.out.println("Direction must be either 'o' or 'v' ");
                     flag = false;
@@ -40,7 +46,7 @@ public class Main {
                     do {
                         flag = true;
                         try {
-                            navi[i].setPosX(giocatore.scegliPosizione(navi[i].getDirezione(), DIM_MAPPA, navi[i].getDimensione(), true, sc));
+                            giocatore.getNavi()[i].setPosX(giocatore.scegliPosizione(giocatore.getNavi()[i].getDirezione(), DIM_MAPPA, giocatore.getNavi()[i].getDimensione(), true, sc));
                         } catch (IndexOutOfBoundsException e) {
                             System.out.println("la nave non rientra nei limiti della mappa");
                             flag = false;
@@ -54,9 +60,8 @@ public class Main {
 
                     System.out.println("Inserisci la posizione Y");
 
-                    flag = true;
                     try {
-                        navi[i].setPosY(giocatore.scegliPosizione(navi[i].getDirezione(), DIM_MAPPA, navi[i].getDimensione(), false, sc));
+                        giocatore.getNavi()[i].setPosY(giocatore.scegliPosizione(giocatore.getNavi()[i].getDirezione(), DIM_MAPPA, giocatore.getNavi()[i].getDimensione(), false, sc));
                     } catch (IndexOutOfBoundsException e) {
                         System.out.println("la nave non rientra nei limiti della mappa");
                         flag = false;
@@ -67,16 +72,15 @@ public class Main {
                     }
                 } while (!flag);
 
-                flag = true;
                 try {
-                    navi[i].isFree(mappa, DIM_MAPPA); //non funge
+                    giocatore.getNavi()[i].isFree(mappa);
                 } catch (OccupiedSlotException e) {
                     System.out.println("la nave interseca con un'altra");
                     flag = false;
                 }
             } while (!flag);
 
-            navi[i].insert(mappa);
+            giocatore.getNavi()[i].insert(mappa);
             giocatore.visualizzaMappa(mappa, DIM_MAPPA);
 
         }
