@@ -3,17 +3,24 @@ import java.util.Scanner;
 public class Giocatore {
     private String nick;
     private int numNavi;
-    public Nave[] navi;
+    private Nave[] navi;
+    private Casella mappa[][];
 
     public String getNick() {
         return nick;
     }
 
-    public Giocatore(String nick, int numNavi) {
+    public Giocatore(String nick, int numNavi,int mapDimension) {
         this.nick = nick;
         this.numNavi = numNavi;
         this.navi = new Nave[numNavi];
+        this.mappa = new Casella[mapDimension][mapDimension];
     }
+
+    public Casella[][] getMappa() {
+        return mappa;
+    }
+
 
     public void inizializzaNavi() {
         for (int i = 0; i < this.numNavi; i++) {
@@ -50,15 +57,15 @@ public class Giocatore {
         return direzione;
     }
 
-    public void popolaMappa(Casella[][] mappa, int DIM) {
+    public void popolaMappa(int DIM) {
         for (int i = 0; i < DIM; i++) {
             for (int j = 0; j < DIM; j++) {
-                mappa[i][j] = new Casella('~');
+                this.mappa[i][j] = new Casella('~');
             }
         }
     }
 
-    public void visualizzaMappa(Casella[][] mappa, int DIM) {
+    public void visualizzaMappa(int DIM) {
         System.out.print("\t");
         for (int i = 0; i < DIM; i++)
             System.out.print(i + 1 + "\t");
@@ -67,7 +74,7 @@ public class Giocatore {
             System.out.print("\n" + (i + 1) + "\t");
             //stampa x
             for (int j = 0; j < DIM; j++) {
-                System.out.print(mappa[i][j].getContenuto() + "\t");
+                System.out.print(this.mappa[i][j].getContenuto() + "\t");
             }
         }
         System.out.print("\n");
@@ -85,11 +92,11 @@ public class Giocatore {
 
     }
 
-    public boolean hasFoundNave(int posX, int posY, Casella[][] mappa) {
+    public boolean hasFoundNave(int posX, int posY) {
         return mappa[posY - 1][posX - 1].getContenuto() == '+';
     }
 
-    public void mostraMappa(Casella[][] mappa, int DIM) {
+    public void mostraMappa(int DIM) {
         System.out.print("\t");
         for (int i = 0; i < DIM; i++)
             System.out.print(i + 1 + "\t");
@@ -98,8 +105,8 @@ public class Giocatore {
             System.out.print("\n" + (i + 1) + "\t");
             //stampa x
             for (int j = 0; j < DIM; j++) {
-                if (mappa[i][j].isShown()) {
-                    System.out.print(mappa[i][j].getContenuto() + "\t");
+                if (this.mappa[i][j].isShown()) {
+                    System.out.print(this.mappa[i][j].getContenuto() + "\t");
                 }
                 else{
                     System.out.print("?\t");

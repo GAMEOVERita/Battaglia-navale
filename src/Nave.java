@@ -5,11 +5,6 @@ public class Nave {
     private int posX;
     private int posY;
 
-    public Nave(char stato, char direzione, int dimensione) {
-        this.stato = stato;
-        this.direzione = direzione;
-        this.dimensione = dimensione;
-    }
 
     public Nave(int dimensione) {
         this.dimensione = dimensione;
