@@ -32,16 +32,8 @@ public class Player {
         return numShips;
     }
 
-    public void setNumShips(int numShips) {
-        this.numShips = numShips;
-    }
-
     public Ship[] getShip() {
         return ship;
-    }
-
-    public void setShip(Ship[] ship) {
-        this.ship = ship;
     }
 
     public char chooseDirection() throws InstantiationError {
