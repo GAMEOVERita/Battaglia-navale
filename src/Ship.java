@@ -1,5 +1,4 @@
 public class Ship {
-    private char state; //COMPLETAMENTE INUTILE
     private char direction;
     private int dimension;
     private int posX;
@@ -8,34 +7,18 @@ public class Ship {
 
     public Ship(int dimensionn) {
         this.dimension = dimensionn;
-        this.state = '+';
         this.direction = 'o';
         this.posX = 0;
         this.posY = 0;
     }
 
-    public int getPosX() {
-        return posX;
-    }
 
     public void setPosX(int posX) {
         this.posX = posX;
     }
 
-    public int getPosY() {
-        return posY;
-    }
-
     public void setPosY(int posY) {
         this.posY = posY;
-    }
-
-    public char getState() {
-        return state;
-    }
-
-    public void setState(char stato) {
-        this.state = stato;
     }
 
     public char getDirection() {
@@ -48,10 +31,6 @@ public class Ship {
 
     public int getDimension() {
         return dimension;
-    }
-
-    public void setDimension(int dimensione) {
-        this.dimension = dimensione;
     }
 
     public void insert(Slot[][] map) {

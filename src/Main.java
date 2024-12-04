@@ -66,7 +66,7 @@ public class Main {
                         } while (!flag);
                         //posY
 
-                        System.out.println("please insert the number for the X axis");
+                        System.out.println("please insert the number for the Y axis");
 
                         try {
                             player[j].getShip()[i].setPosY(player[j].choosePosition(player[j].getShip()[i].getDirection(), DIM_MAP, player[j].getShip()[i].getDimension(), false, sc));
